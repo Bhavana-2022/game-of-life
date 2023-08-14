@@ -22,7 +22,23 @@ pipeline {
          }
          stage ('build and package') {
             steps {
-                sh script : 'mvn package'
+                rtMavenDeployer(
+                    id: 'newgoal',
+                    serverId: 'goalinstance',
+                    releaseRepo: 'gol-libs-release',
+                    snapshotRepo: 'gol-libs-snapshot'
+
+                )
+                rtMavenRun (
+                    tool: 'maven',
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: 'newgoal'
+                    
+                )
+                rtPublishBuildInfo(
+                    serverId: 'goalinstance'
+                )
             }
          }
 
