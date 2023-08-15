@@ -47,7 +47,7 @@ pipeline {
                 // performing sonarqube analysis with "withSonarQubeENV(<Name of Server configured in Jenkins>)"
                 withSonarQubeEnv('SONAR_CLOUD') {
                 // requires SonarQube Scanner for Maven 3.2+
-                    sh 'mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bhavana123_gameoflife'
+                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bhavana123_gameoflife'
                 }
             }
         }
